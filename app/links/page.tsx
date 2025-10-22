@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { FaInstagram, FaYoutube, FaGlobe, FaEnvelope, FaEtsy } from 'react-icons/fa';
 import Image from 'next/image';
 import Head from 'next/head';
+import { getAssetPath } from '../utils/path';
 
 const links = [
   {
@@ -59,12 +60,12 @@ export default function LinksPage() {
         {/* Header */}
         <section className="text-center pt-12 pb-6">
           <div className="w-24 h-24 mx-auto rounded-full bg-white shadow-md overflow-hidden border-4 border-white ring-2 ring-emerald-100 mb-4">
-            <Image
-              src="/zephilea.png"
+            <Image 
+              src={getAssetPath('/zephilea.png')} 
               alt="Zephilea Logo"
               width={96}
               height={96}
-              className="w-full h-full object-cover"
+              className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
               priority
             />
           </div>
