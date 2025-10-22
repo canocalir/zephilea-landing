@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import { getAssetPath } from './utils/path';
 
 const LoadingBar = () => {
   const [secondsLeft, setSecondsLeft] = useState(10);
@@ -90,7 +91,7 @@ export default function Home() {
               <div className="p-6 sm:p-8 text-center">
                 <div className="w-28 h-28 mx-auto mb-6 rounded-full bg-white shadow-sm overflow-hidden border-4 border-white ring-2 ring-indigo-100">
                   <Image 
-                    src="/zephilea.png" 
+                    src={getAssetPath('/zephilea.png')} 
                     alt="Zephilea Logo"
                     width={112}
                     height={112}
