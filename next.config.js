@@ -1,19 +1,17 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production';
+const repo = 'zephilea-landing';
+
 const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
   output: 'export',
-  basePath: process.env.NODE_ENV === 'production' ? '/zephilea-landing' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/zephilea-landing/' : '',
+  distDir: 'out',
+  basePath: isProd ? `/${repo}` : '',
+  assetPrefix: isProd ? `/${repo}/` : '',
   images: {
     unoptimized: true,
   },
-  experimental: {
-    // Enable the webpack build worker
-    workerThreads: true,
-    // Enable the new Next.js font optimization
-    optimizeFonts: true,
-  },
-}
+  trailingSlash: true,
+  reactStrictMode: false,
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

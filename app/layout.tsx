@@ -1,8 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
+import ClientLayout from './client-layout';
 
 export const metadata: Metadata = {
   title: 'Zephilea Atelier - Handcrafted Creations',
@@ -38,10 +35,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-gray-50 min-h-screen`}>
-        {children}
-      </body>
-    </html>
+    <ClientLayout>
+      {children}
+    </ClientLayout>
   );
 }
