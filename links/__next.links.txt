@@ -1,0 +1,4 @@
+1:"$Sreact.fragment"
+2:I[12231,["/zephilea-landing/_next/static/chunks/177e234c85ab0fab.js","/zephilea-landing/_next/static/chunks/de8d22f483c43652.js"],"default"]
+3:I[57440,["/zephilea-landing/_next/static/chunks/177e234c85ab0fab.js","/zephilea-landing/_next/static/chunks/de8d22f483c43652.js"],"default"]
+0:{"buildId":"oA8IpQ782mPF0UqpfSPru","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}

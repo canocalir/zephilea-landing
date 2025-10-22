@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script>
+      // Get the current path and redirect to the same path in the app
+      const path = window.location.pathname;
+      // Remove the base path if present
+      const basePath = '/zephilea-landing';
+      let newPath = path.startsWith(basePath) ? path : basePath + path;
+      // Ensure there's a trailing slash for GitHub Pages
+      if (!newPath.endsWith('/')) newPath += '/';
+      // Redirect to the app with the current path
+      window.location.href = newPath;
+    </script>
+    <meta http-equiv="refresh" content="0; URL=./index.html">
+  </head>
+  <body>
+    <p>Redirecting to the app...</p>
+  </body>
+</html>
