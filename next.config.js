@@ -7,24 +7,42 @@ const nextConfig = {
   output: 'export',
   distDir: 'out',
   basePath: basePath,
-  assetPrefix: basePath ? `${basePath}/` : undefined,
+  assetPrefix: basePath ? `${basePath}/` : '',
   images: {
     unoptimized: true,
-    path: basePath ? `${basePath}/_next/image` : '/_next/image',
+    loader: 'custom',
+    loaderFile: './app/utils/imageLoader.js',
   },
   trailingSlash: true,
-  reactStrictMode: false,
+  reactStrictMode: true,
   
   // Configure webpack to handle asset prefixing
-  webpack: (config, { isServer }) => {
+  webpack: (config, { isServer, dev }) => {
     // Fixes npm packages that depend on `fs` module
     if (!isServer) {
       config.resolve.fallback.fs = false;
     }
     
-    // Add public path for static assets
-    if (!isServer) {
+    // Add public path for static assets in production
+    if (!isServer && !dev) {
       config.output.publicPath = `${basePath}${config.output.publicPath}`;
+      
+      // Ensure chunks are properly prefixed
+      if (config.optimization && config.optimization.splitChunks) {
+        config.optimization.splitChunks = {
+          ...config.optimization.splitChunks,
+          chunks: 'all',
+          cacheGroups: {
+            ...config.optimization.splitChunks.cacheGroups,
+            styles: {
+              name: 'styles',
+              test: /\.css$/,
+              chunks: 'all',
+              enforce: true,
+            },
+          },
+        };
+      }
     }
     
     return config;
