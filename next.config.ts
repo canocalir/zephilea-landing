@@ -11,8 +11,8 @@ const nextConfig: NextConfig = {
   output: 'export',
   images: {
     unoptimized: true,
-    loader: 'custom',
-    loaderFile: './app/utils/imageLoader.js',
+    // Use default loader for static export
+    loader: 'default',
     path: basePath ? `${basePath}/_next/image` : '/_next/image',
   },
   poweredByHeader: false,
@@ -20,31 +20,16 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Disable image optimization API routes in static export
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /\.(png|jpg|jpeg|gif|svg|webp)$/i,
-      use: [
-        {
-          loader: 'file-loader',
-          options: {
-            publicPath: `${basePath}/_next/static/images`,
-            outputPath: 'static/images',
-            name: '[name]-[hash].[ext]',
-          },
-        },
-      ],
-    });
-    return config;
-  },
 };
 
-// For development, use default Next.js image optimization
+// For development, use default Next.js settings
 if (!isProd) {
-  delete (nextConfig as any).images?.loader;
-  delete (nextConfig as any).images?.loaderFile;
   delete (nextConfig as any).basePath;
   delete (nextConfig as any).assetPrefix;
+  nextConfig.images = {
+    ...nextConfig.images,
+    unoptimized: false,
+  };
 }
 
 export default nextConfig;
