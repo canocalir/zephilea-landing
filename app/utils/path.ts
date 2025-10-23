@@ -6,7 +6,7 @@ const repo = 'zephilea-landing';
 const basePath = 
   typeof process !== 'undefined' && process.env.NEXT_PUBLIC_BASE_PATH 
     ? process.env.NEXT_PUBLIC_BASE_PATH 
-    : (isProd ? `/${repo}` : '');
+    : (isProd ? `` : '');
 
 export const getAssetPath = (path: string): string => {
   // Remove leading slash if present to avoid double slashes
