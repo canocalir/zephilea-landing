@@ -7,25 +7,42 @@ const basePath = isGithubActions || isProd ? '' : '';
 const nextConfig: NextConfig = {
   reactCompiler: true,
   basePath: basePath,
-  assetPrefix: basePath || undefined,
+  assetPrefix: basePath ? `${basePath}/` : '',
   output: 'export',
   images: {
     unoptimized: true,
+    loader: 'custom',
+    loaderFile: './app/utils/imageLoader.js',
+    path: basePath ? `${basePath}/_next/image` : '/_next/image',
   },
   poweredByHeader: false,
   trailingSlash: true,
-  // Disable type checking during build
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Disable ESLint during build
-  eslint: {
-    ignoreDuringBuilds: true,
+  // Disable image optimization API routes in static export
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.(png|jpg|jpeg|gif|svg|webp)$/i,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {
+            publicPath: `${basePath}/_next/static/images`,
+            outputPath: 'static/images',
+            name: '[name]-[hash].[ext]',
+          },
+        },
+      ],
+    });
+    return config;
   },
 };
 
-// For development, clear basePath and assetPrefix
+// For development, use default Next.js image optimization
 if (!isProd) {
+  delete (nextConfig as any).images?.loader;
+  delete (nextConfig as any).images?.loaderFile;
   delete (nextConfig as any).basePath;
   delete (nextConfig as any).assetPrefix;
 }
