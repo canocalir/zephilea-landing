@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from 'next/document';
 
 // Helper function to get the correct asset path
 function getAssetPath(path) {
-  const basePath = process.env.NODE_ENV === 'production' ? '/zephilea-landing' : '';
+  const basePath = process.env.NODE_ENV === 'production' ? '' : '';
   return `${basePath}${path}`;
 }
 
