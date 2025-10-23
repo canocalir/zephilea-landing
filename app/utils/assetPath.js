@@ -9,7 +9,7 @@ export function getAssetPath(path) {
   
   // In production, prepend the base path
   if (process.env.NODE_ENV === 'production') {
-    return `/zephilea-landing${normalizedPath}`;
+    return `/${normalizedPath}`;
   }
   
   return normalizedPath;

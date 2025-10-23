@@ -7,7 +7,7 @@
       // Get the current path and redirect to the same path in the app
       const path = window.location.pathname;
       // Remove the base path if present
-      const basePath = '/zephilea-landing';
+      const basePath = '/';
       let newPath = path.startsWith(basePath) ? path : basePath + path;
       // Ensure there's a trailing slash for GitHub Pages
       if (!newPath.endsWith('/')) newPath += '/';
