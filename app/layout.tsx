@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ClientLayout from './client-layout';
+import { getAssetPath } from './utils/path';
 
 export const metadata: Metadata = {
   title: 'Zephilea Atelier - Handcrafted Creations',
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     siteName: 'Zephilea Atelier',
     images: [
       {
-        url: '/zephilea.png',
+        url: getAssetPath('/zephilea.png'),
         width: 800,
         height: 600,
         alt: 'Zephilea Atelier Logo',
@@ -23,8 +24,8 @@ export const metadata: Metadata = {
     type: 'website',
   },
   icons: {
-    icon: '/favicon.ico',
-    apple: '/favicon.ico',
+    icon: getAssetPath('/favicon.ico'),
+    apple: getAssetPath('/favicon.ico'),
   },
   metadataBase: new URL('https://zephilea.com'),
 };

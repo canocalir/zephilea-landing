@@ -7,20 +7,40 @@ const nextConfig = {
   output: 'export',
   distDir: 'out',
   basePath: basePath,
-  assetPrefix: basePath ? `${basePath}/` : '',
+  assetPrefix: basePath ? `${basePath}/` : undefined,
   images: {
     unoptimized: true,
     path: basePath ? `${basePath}/_next/image` : '/_next/image',
   },
   trailingSlash: true,
   reactStrictMode: false,
-  // Ensure public assets are properly prefixed
-  publicRuntimeConfig: {
-    basePath: basePath,
+  
+  // Configure webpack to handle asset prefixing
+  webpack: (config, { isServer }) => {
+    // Fixes npm packages that depend on `fs` module
+    if (!isServer) {
+      config.resolve.fallback.fs = false;
+    }
+    
+    // Add public path for static assets
+    if (!isServer) {
+      config.output.publicPath = `${basePath}${config.output.publicPath}`;
+    }
+    
+    return config;
   },
-  // Disable the static HTML optimization for now
+  
+  // Turbopack configuration
   experimental: {
     optimizePackageImports: ['framer-motion'],
+  },
+  
+  // Disable Turbopack for now as we're using webpack
+  turbopack: {},
+  
+  // Environment variables that will be available in the browser
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
   },
 };
 
