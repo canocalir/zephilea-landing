@@ -9,7 +9,8 @@
     "lint": "eslint",
     "export": "next build && next export",
     "predeploy": "rm -rf out && next build && touch out/.nojekyll && cp -r public/* out/",
-    "deploy": "gh-pages --dist out --dotfiles --message 'Deploy to GitHub Pages'"
+    "deploy": "gh-pages --dist out --dotfiles --message 'Deploy to GitHub Pages'",
+    "build:gh-pages": "GITHUB_ACTIONS=true next build"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
